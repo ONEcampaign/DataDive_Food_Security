@@ -23,6 +23,11 @@ def add_flourish_geometries(df: pd.DataFrame, key_column_name: str = 'iso_code')
     return pd.merge(g, df, on=key_column_name, how="left")
 
 
+def remove_unnamed_cols(df:pd.DataFrame) -> pd.DataFrame:
+    """removes all columns with 'Unnamed' """
+
+    return df.loc[:, ~df.columns.str.contains('Unnamed')]
+
 
 
 

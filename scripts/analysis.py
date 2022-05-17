@@ -3,6 +3,9 @@
 from scripts import utils, config
 import pandas as pd
 import country_converter as coco
+from bs4 import BeautifulSoup
+from typing import Optional
+import requests
 
 
 def get_stunting_wb() -> pd.DataFrame:
@@ -29,6 +32,7 @@ def __clean_dhs(df:pd.DataFrame) -> pd.DataFrame:
           .dropna(subset = 'indicator')
           .filter(columns.values(), axis=1)
           .assign(iso_code = lambda d: coco.convert(d.country))
+          .reset_index(drop=True)
           )
 
     return df
@@ -40,6 +44,42 @@ def get_dhs_indicator(indicator:str, category_name:str) -> pd.DataFrame:
     df = __clean_dhs(df)
 
     return df.loc[(df['indicator'] == indicator)&(df['category_name'] == category_name)]
+
+
+def __read_fao_food_price_index(parser:Optional[str] = 'html.parser',
+                              headers:Optional[dict] = {'User-Agent': 'Mozilla/5.0'}) -> pd.DataFrame:
+    """Retrieve food price index from FAO"""
+
+    full_url = 'https://www.fao.org/worldfoodsituation/foodpricesindex/en/'
+    base_url = 'https://www.fao.org/'
+
+    # scrape download link
+    content = requests.get(full_url).content
+    soup = BeautifulSoup(content, parser)
+    href = soup.find_all(text = 'CSV')[0].parent.get('href')
+    download_link = base_url + href
+
+    # read csv
+    df = pd.read_csv(download_link, skiprows=2, storage_options=headers, parse_dates=['Date'])
+
+    return df
+
+def __clean_fao_food_price_index(df = pd.DataFrame) -> pd.DataFrame:
+    """Clean food price dataframe"""
+
+    df = (df.rename(columns = {'Date': 'date'})
+          .pipe(utils.remove_unnamed_cols)
+          .dropna(subset = 'date')
+          .reset_index(drop=True)
+          )
+
+    return df
+
+
+
+
+
+
 
 
 

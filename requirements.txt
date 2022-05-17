@@ -1,3 +1,5 @@
 wbgapi~=1.0.7
 pandas~=1.4.1
 country_converter
+beautifulsoup4~=4.11.1
+requests~=2.27.1
