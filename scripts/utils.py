@@ -5,6 +5,27 @@ import wbgapi as wb
 import pandas as pd
 
 
+def add_flourish_geometries(df: pd.DataFrame, key_column_name: str = 'iso_code') -> pd.DataFrame:
+    """
+    Adds a geometry column to a dataframe based on iso3 code
+        df: DataFrame to add a column
+        key_column_name: name of column with iso3 codes to merge on, default = 'iso_code'
+    """
+
+    g = pd.read_json(f"{config.paths.raw_data}/flourish_geometries_world.json")
+    g = (
+        g.rename(columns={g.columns[0]: "flourish_geom", g.columns[1]: key_column_name})
+            .iloc[1:]
+            .drop_duplicates(subset=key_column_name, keep="first")
+            .reset_index(drop=True)
+    )
+
+    return pd.merge(g, df, on=key_column_name, how="left")
+
+
+
+
+
 # ===================================================
 # World Bank API
 # ===================================================
