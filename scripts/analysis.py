@@ -75,6 +75,21 @@ def __clean_fao_food_price_index(df = pd.DataFrame) -> pd.DataFrame:
 
     return df
 
+def get_food_price_index(*,
+                         parser:Optional[str] = 'html.parser',
+                         headers:Optional[dict] = {'User-Agent': 'Mozilla/5.0'}) -> pd.DataFrame:
+    """
+    extract food price index from FAO
+        parser: type of parser to use, default = html.parser
+        headers: set headers to read csv, default = 'User-Agent': 'Mozilla/5.0'
+    """
+
+    df = __read_fao_food_price_index(parser = parser, headers = headers)
+    df = __clean_fao_food_price_index(df)
+
+    return df
+
+
 
 
 
