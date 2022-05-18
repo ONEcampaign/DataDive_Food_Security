@@ -3,3 +3,4 @@ pandas~=1.4.1
 country_converter
 beautifulsoup4~=4.11.1
 requests~=2.27.1
+numpy~=1.21.5
