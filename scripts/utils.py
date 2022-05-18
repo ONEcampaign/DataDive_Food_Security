@@ -12,7 +12,7 @@ def add_flourish_geometries(df: pd.DataFrame, key_column_name: str = 'iso_code')
         key_column_name: name of column with iso3 codes to merge on, default = 'iso_code'
     """
 
-    g = pd.read_json(f"{config.paths.raw_data}/flourish_geometries_world.json")
+    g = pd.read_json(f"{config.paths.glossaries}/flourish_geometries_world.json")
     g = (
         g.rename(columns={g.columns[0]: "flourish_geom", g.columns[1]: key_column_name})
             .iloc[1:]
@@ -28,7 +28,11 @@ def remove_unnamed_cols(df:pd.DataFrame) -> pd.DataFrame:
 
     return df.loc[:, ~df.columns.str.contains('Unnamed')]
 
+def get_latest_values(df:pd.DataFrame, grouping_col:str, date_col:str) -> pd.DataFrame:
+    """ """
 
+    return (df.loc[df.groupby(grouping_col)[date_col].transform(max) == df[date_col]]
+            .reset_index(drop=True))
 
 
 # ===================================================

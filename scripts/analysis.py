@@ -18,7 +18,9 @@ def get_stunting_wb() -> pd.DataFrame:
     Extract indicator Prevalence of stunting (SH.STA.STNT.ME.ZS) from World Bank
     https://data.worldbank.org/indicator/SH.STA.STNT.ME.ZS
     """
-    return utils.get_wb_indicator(code = 'SH.STA.STNT.ME.ZS', database=2)
+    return (utils.get_wb_indicator(code = 'SH.STA.STNT.ME.ZS', database=2)
+            .dropna(subset='value')
+            .reset_index(drop=True))
 
 
 def __clean_dhs(df:pd.DataFrame) -> pd.DataFrame:
@@ -171,6 +173,10 @@ def get_ipc_latest_country() -> pd.DataFrame:
 
 
 if __name__ == '__main__':
-    #stunting = get_dhs_indicator('Children stunted', 'Wealth quintile')
-    ipc = get_ipc_latest_country()
+    #stunting_wealth = get_dhs_indicator('Children stunted', 'Wealth quintile')
+    #ipc = get_ipc_latest_country()
+
+    stunting = get_stunting_wb()
+    stunting = utils.get_latest_values(stunting, 'iso_code', 'year')
+    stunting = utils.add_flourish_geometries(stunting)
 
