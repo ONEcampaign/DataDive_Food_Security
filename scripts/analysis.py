@@ -95,7 +95,7 @@ def get_food_price_index(*,
     return df
 
 def __clean_ipc(df:pd.DataFrame) -> pd.DataFrame:
-    """ """
+    """Cleans data from IPC"""
 
     columns = {'Country':'country',
                'Area':'area',
@@ -149,7 +149,7 @@ def __clean_ipc(df:pd.DataFrame) -> pd.DataFrame:
     return df
 
 def get_ipc_latest_country() -> pd.DataFrame:
-    """ """
+    """Extract the latest data from IPC at country level"""
 
     try:
         url = 'https://map.ipcinfo.org/api/public/population-tracking-tool/data/2017,2022/?export=true&condition=A'
