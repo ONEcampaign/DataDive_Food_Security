@@ -97,6 +97,21 @@ def get_food_price_index(*,
     return df
 
 
+def get_ipc():
+    """
+    return clean dataset from IPC: https://www.ipcinfo.org/ipcinfo-website/ipc-dashboard/en/
+    data needs to be manually downloaded and put into raw_data folder as 'IPC_data.csv'
+    """
+    df = pd.read_csv(f'{config.paths.raw_data}/IPC_data.csv', skiprows=1)
+    columns = {'Country':'country', 'Phase 2':'phase_2', 'Phase 3':'phase_3',
+               'Phase 4':'phase_4', 'Phase 5':'phase_5', 'Phase 3+':'phase_3plus',
+               'Period from':'period_start', 'Period to':'period_end', 'IPC/CH':'source'}
+    df = df.rename(columns=columns).dropna(subset='source')
+
+    return df
+
+
+
 
 if __name__ == '__main__':
     pass
