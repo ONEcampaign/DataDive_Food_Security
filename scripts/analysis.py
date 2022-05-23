@@ -115,6 +115,36 @@ def get_ipc():
 
 
 
+#undernourishment
+
+def __clean_fao_undernourishment(df:pd.DataFrame) -> pd.DataFrame:
+    """ """
+
+    df.columns = df.columns.str.lower()
+    df = (df.loc[:, ['area', 'item', 'year', 'value']]
+          .replace({"China, Taiwan Province of": "Taiwan", "China, mainland": "China"})
+          .assign(value_text = lambda d: d.value)
+          .assign(value = lambda d: utils.clean_numeric_column(d.value.str.replace('<', '')))
+          .reset_index(drop=True))
+
+    return df
+
+
+
+def get_fao_undernourishment() -> pd.DataFrame:
+    """
+    read FAO undernourishment data from raw_data folder 'fao_undernourishment_data
+    Data needs to be manually downloaded from FAOStat food security and Nutrition
+    """
+
+    df = pd.read_csv(f'{config.paths.raw_data}/FAO_undernourishment_data.csv')
+    df = __clean_fao_undernourishment(df)
+
+    return df
+
+
+
+
 if __name__ == '__main__':
     pass
 

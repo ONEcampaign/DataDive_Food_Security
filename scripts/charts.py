@@ -3,9 +3,50 @@
 import pandas as pd
 import numpy as np
 from scripts import utils, config
-from scripts.analysis import get_stunting_wb
+from scripts.analysis import get_stunting_wb, get_fao_undernourishment
 import country_converter as coco
 
+
+# ================================================================================
+# undernourishment
+# ================================================================================
+
+def _undernourishment_world(df:pd.DataFrame) -> None:
+    """ """
+
+
+    pct_df = df.loc[df.item == 'Prevalence of undernourishment (percent) (annual value)', ['area', 'year', 'value', 'value_text']]
+    mil_df = df.loc[df.item == 'Number of people undernourished (million) (annual value)', ['area', 'year', 'value', 'value_text']]
+
+    final =  pd.merge(pct_df, mil_df, on=['area', 'year'], how='inner', suffixes=('_pct', '_mil'))
+    final[final.area == 'World'].to_csv(f'{config.paths.output}/undernourishment_world.csv', index=False)
+
+
+def _undernourishment_region(df:pd.DataFrame) -> None:
+    """ """
+
+    regions = ['Africa', 'Northern America', 'Europe',  'Central America', 'Caribbean', 'South America', 'Asia', 'Oceania']
+
+    pct_df = df.loc[df.item == 'Prevalence of undernourishment (percent) (annual value)', ['area', 'year', 'value', 'value_text']]
+    mil_df = df.loc[df.item == 'Number of people undernourished (million) (annual value)', ['area', 'year', 'value', 'value_text']]
+
+    final =  pd.merge(pct_df, mil_df, on=['area', 'year'], how='inner', suffixes=('_pct', '_mil'))
+    final = final[final.area.isin(regions)]
+
+    return final
+
+
+
+
+   # final.to_csv(f'{config.paths.output}/undernourishment_region.csv', index=False)
+
+
+def undernourishment() -> None:
+    """ """
+
+    fao_df = get_fao_undernourishment()
+
+    _undernourishment_world(fao_df)
 
 # ================================================================================
 # stunting
