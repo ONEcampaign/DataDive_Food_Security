@@ -107,6 +107,8 @@ def get_ipc():
                'Phase 4':'phase_4', 'Phase 5':'phase_5', 'Phase 3+':'phase_3plus',
                'Period from':'period_start', 'Period to':'period_end', 'IPC/CH':'source'}
     df = df.rename(columns=columns).dropna(subset='source')
+    for col in ['phase_2', 'phase_3', 'phase_4', 'phase_5', 'phase_3plus']:
+        df[col] = utils.clean_numeric_column(df[col])
 
     return df
 

@@ -29,6 +29,13 @@ def remove_unnamed_cols(df:pd.DataFrame) -> pd.DataFrame:
 
     return df.loc[:, ~df.columns.str.contains('Unnamed')]
 
+def clean_numeric_column(column: pd.Series) -> pd.Series:
+
+    column = column.str.replace(",", "")
+    column = pd.to_numeric(column)
+
+    return column
+
 def get_latest_values(df:pd.DataFrame, grouping_col:str, date_col:str) -> pd.DataFrame:
     """ """
 
