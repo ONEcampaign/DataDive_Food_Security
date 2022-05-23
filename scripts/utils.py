@@ -4,7 +4,7 @@ from scripts import config
 import wbgapi as wb
 import pandas as pd
 import weo
-
+import country_converter as coco
 
 def add_flourish_geometries(df: pd.DataFrame, key_column_name: str = 'iso_code') -> pd.DataFrame:
     """
@@ -34,6 +34,32 @@ def get_latest_values(df:pd.DataFrame, grouping_col:str, date_col:str) -> pd.Dat
 
     return (df.loc[df.groupby(grouping_col)[date_col].transform(max) == df[date_col]]
             .reset_index(drop=True))
+
+
+def keep_countries(df:pd.DataFrame, iso_col:str = 'iso_code') -> pd.DataFrame:
+    """returns a dataframe with only countries"""
+
+    cc = coco.CountryConverter()
+    return df[df[iso_col].isin(cc.data['ISO3'])].reset_index(drop=True)
+
+def filter_countries(df:pd.DataFrame, by: str, values:list = ['Africa'], iso_col:str = 'iso_code') -> pd.DataFrame:
+    """
+    returns a filtered dataframe
+        by: filtering category -'continent', UNregion etc.
+        values: list of values to keep
+    """
+
+    cc = coco.CountryConverter()
+    if by not in cc.data.columns:
+        raise ValueError(f'{by} is not valid')
+
+    df[by] = coco.convert(df[iso_col], to=by)
+    return (df[df[by]
+            .isin(values)]
+            .drop(columns = by)
+            .reset_index(drop=True))
+
+
 
 
 # ===================================================
