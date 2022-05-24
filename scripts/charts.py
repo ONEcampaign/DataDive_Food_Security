@@ -3,7 +3,7 @@
 import pandas as pd
 import numpy as np
 from scripts import utils, config
-from scripts.analysis import get_stunting_wb, get_fao_undernourishment
+from scripts.analysis import get_stunting_wb, get_fao_undernourishment, get_usda_food_exp
 import country_converter as coco
 
 
@@ -98,6 +98,17 @@ def stunting_charts() -> None:
     _stunting_vs_gdppc(stunting)
 
 
+# ========================================================
+# food expenditure share
+# ========================================================
+
+def food_exp_share_chart() -> None:
+    """ """
+
+    df = get_usda_food_exp()
+    df = utils.add_gdp_latest(df, iso_col='iso_code', per_capita = True)
+
+    return df
 
 
 
