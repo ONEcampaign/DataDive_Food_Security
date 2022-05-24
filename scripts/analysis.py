@@ -106,7 +106,10 @@ def get_ipc():
     columns = {'Country':'country', 'Phase 2':'phase_2', 'Phase 3':'phase_3',
                'Phase 4':'phase_4', 'Phase 5':'phase_5', 'Phase 3+':'phase_3plus',
                'Period from':'period_start', 'Period to':'period_end', 'IPC/CH':'source'}
-    df = df.rename(columns=columns).dropna(subset='source')
+    df = df.rename(columns=columns).dropna(subset='source').replace({'United Republic of Tanzania':'Tanzania',
+                                                                    'Tri-national Central America':'Central America',
+                                                                    'Democratic Republic of the Congo': 'DRC',
+                                                                    'Central African Republic': 'CAR'})
     for col in ['phase_2', 'phase_3', 'phase_4', 'phase_5', 'phase_3plus']:
         df[col] = utils.clean_numeric_column(df[col])
 

@@ -3,7 +3,7 @@
 import pandas as pd
 import numpy as np
 from scripts import utils, config
-from scripts.analysis import get_stunting_wb, get_fao_undernourishment, get_usda_food_exp
+from scripts.analysis import get_stunting_wb, get_fao_undernourishment, get_usda_food_exp, get_ipc
 import country_converter as coco
 
 
@@ -107,8 +107,36 @@ def food_exp_share_chart() -> None:
 
     df = get_usda_food_exp()
     df = utils.add_gdp_latest(df, iso_col='iso_code', per_capita = True)
+    df.to_csv(f'{config.paths.output}/food_share_chart.csv', index=False)
 
     return df
+
+
+# ===========================================================
+# IPC charts
+# ===============================================================
+
+
+def ipc_charts() -> None:
+    """ """
+
+    phases = {'Phase 2':'phase_2', 'Phase 3':'phase_3',
+              'Phase 4':'phase_4', 'Phase 5':'phase_5', 'Phase 3+':'phase_3plus'}
+    df = get_ipc()
+
+    for phase in phases.values():
+        df_phase = df.copy()
+        (df_phase
+        .sort_values(by = phase)
+        .reset_index(drop=True)
+        .loc[:15, ['country', phase, 'period_start', 'period_end', 'source']]
+        .dropna(subset = phase)
+        .to_csv(f'{config.paths.output}/ipc_{phase}.csv', index=False))
+
+
+
+
+
 
 
 
