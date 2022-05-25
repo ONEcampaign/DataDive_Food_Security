@@ -125,11 +125,11 @@ def ipc_charts() -> None:
     df = get_ipc()
 
     for phase in phases.values():
-        df_phase = df.copy()
+        df_phase = df.copy(deep=True)
         (df_phase
-        .sort_values(by = phase)
+        .sort_values(by = phase, ascending=False)
         .reset_index(drop=True)
-        .loc[:15, ['country', phase, 'period_start', 'period_end', 'source']]
+        .loc[0:15, ['country', phase, 'period_start', 'period_end', 'source']]
         .dropna(subset = phase)
         .to_csv(f'{config.paths.output}/ipc_{phase}.csv', index=False))
 

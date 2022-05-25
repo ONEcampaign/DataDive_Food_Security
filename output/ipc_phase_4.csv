@@ -1,17 +1,17 @@
 country,phase_4,period_start,period_end,source
-Senegal,720.0,Mar 2022,May 2022,CH
-Cabo Verde,1076.0,Mar 2022,May 2022,CH
-Djibouti,4923.0,Mar 2022,Jun 2022,IPC
-Central America,7440.0,Mar 2022,May 2022,IPC
-Guinea,9197.0,Mar 2022,May 2022,CH
-Sierra Leone,16829.0,Mar 2022,May 2022,CH
-Mozambique,23553.0,Apr 2022,Sep 2022,IPC
-Lesotho,25643.0,Jan 2022,Mar 2022,IPC
-Chad,35958.0,Mar 2022,May 2022,CH
-Ghana,37018.0,Mar 2022,May 2022,CH
-Mauritania,42444.0,Mar 2022,May 2022,CH
-Benin,42818.0,Mar 2022,May 2022,CH
-Eswatini,49544.0,Dec 2021,Mar 2022,IPC
-El Salvador,60879.0,Mar 2022,May 2022,IPC
-Tanzania,94935.0,May 2022,Sep 2022,IPC
-Namibia,118616.0,Dec 2021,Mar 2022,IPC
+Afghanistan,6593329.0,Mar 2022,May 2022,IPC
+Yemen,5619500.0,Jan 2022,May 2022,IPC
+DRC,5415900.0,Jan 2022,Jun 2022,IPC
+South Sudan,2892000.0,Apr 2022,Jul 2022,IPC
+Somalia,1740170.0,Apr 2022,Jun 2022,IPC
+Sudan,1324529.0,Oct 2021,Feb 2022,IPC
+Haiti,1317626.0,Mar 2022,Jun 2022,IPC
+Pakistan,1030258.0,Apr 2022,Jun 2022,IPC
+Kenya,757796.0,Mar 2022,Jun 2022,IPC
+CAR,638021.0,Apr 2022,Aug 2022,IPC
+Nigeria,560334.0,Mar 2022,May 2022,CH
+Angola,416660.0,Oct 2021,Mar 2022,IPC
+Burkina Faso,323739.0,Mar 2022,May 2022,CH
+Honduras,281637.0,Mar 2022,May 2022,IPC
+Cameroon,253853.0,Mar 2022,May 2022,CH
+Niger,220720.0,Mar 2022,May 2022,CH
