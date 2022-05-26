@@ -67,7 +67,7 @@ def _stunting_top_countries_bar(df:pd.DataFrame) -> None:
 
     df = (utils
      .get_latest_values(df, 'iso_code', 'year')
-     .pipe(utils.filter_countries, 'continent', ['Africa'])
+     #.pipe(utils.filter_countries, 'continent', ['Africa'])
      .sort_values(by='value', ascending=False)
      .pipe(utils.keep_countries)
      .reset_index(drop=True)
