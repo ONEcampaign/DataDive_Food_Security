@@ -79,14 +79,3 @@ def get_indices(indices: Optional[list] = None) -> pd.DataFrame:
 
 
 
-def index_chart(indexes:Optional[list] = ['Agriculture', 'Food', 'Oils & Meals', 'Grains', 'Other Food', 'Fertilizers']) -> None:
-    """ """
-
-    df = get_indices(indexes)
-    df.loc[df.period>='2010-01-01'].to_csv(f'{config.paths.output}/index_chart.csv', index=False)
-
-def commodity_chart(commodities: list, name=str) -> None:
-    """ """
-
-    df = get_commodity_prices(commodities)
-    df[df.period>='2010-01-01'].to_csv(f'{config.paths.output}/{name}_chart.csv', index=False)

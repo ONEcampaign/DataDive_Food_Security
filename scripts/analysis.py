@@ -78,6 +78,7 @@ def __clean_fao_food_price_index(df = pd.DataFrame) -> pd.DataFrame:
           .pipe(utils.remove_unnamed_cols)
           .dropna(subset = 'date')
           .reset_index(drop=True)
+          .rename(columns = {'Oils':'Vegetable Oil'})
           )
 
     return df
