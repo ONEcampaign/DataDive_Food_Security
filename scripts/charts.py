@@ -123,3 +123,20 @@ def restriction_chart() -> None:
 
     pass
 
+
+def update_charts() -> None:
+    """pipileine to update charts for the page"""
+
+    fao_fpi_main()
+    ipc_charts()
+    stunting_top_countries_bar()
+    food_exp_share_chart()
+    fao_fpi_scrolly()
+    commodity_chart()
+    restriction_chart()
+
+
+if __name__ == '__main__':
+    update_charts()
+    print('Successfully updated charts')
+
