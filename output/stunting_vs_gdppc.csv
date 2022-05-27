@@ -1,0 +1,152 @@
+iso_code,country_name,year,value,gdp_per_capita,continent
+ZWE,Zimbabwe,2020,23.0,2300.56,Africa
+ZMB,Zambia,2020,32.3,1330.374,Africa
+YEM,"Yemen, Rep.",2020,37.2,890.998,
+VNM,Vietnam,2020,22.3,4121.504,
+VEN,"Venezuela, RB",2020,10.6,1823.602,
+VUT,Vanuatu,2020,28.7,3144.839,
+UZB,Uzbekistan,2020,9.9,2071.365,
+URY,Uruguay,2020,6.5,18082.832,
+USA,United States,2020,3.2,76027.043,
+UKR,Ukraine,2020,15.9,4827.952,
+UGA,Uganda,2020,27.9,1060.427,Africa
+TUV,Tuvalu,2020,9.7,6046.532,
+TKM,Turkmenistan,2020,7.6,12273.663,
+TUN,Tunisia,2020,8.6,3763.007,Africa
+TTO,Trinidad and Tobago,2020,8.7,17920.962,
+TON,Tonga,2020,2.6,5283.039,
+TGO,Togo,2020,23.8,999.907,Africa
+TLS,Timor-Leste,2020,48.8,1402.056,
+THA,Thailand,2020,12.3,7448.988,
+TZA,Tanzania,2020,32.0,1260.065,Africa
+TJK,Tajikistan,2020,15.3,795.038,
+SUR,Suriname,2020,8.0,4842.749,
+SDN,Sudan,2020,33.7,673.935,Africa
+LCA,St. Lucia,2020,2.8,11363.749,
+LKA,Sri Lanka,2020,16.0,3698.559,
+SSD,South Sudan,2020,30.6,392.704,Africa
+ZAF,South Africa,2020,23.2,6979.44,Africa
+SOM,Somalia,2020,27.4,543.833,Africa
+SLB,Solomon Islands,2020,29.3,2333.759,
+SGP,Singapore,2020,2.8,79575.891,
+SLE,Sierra Leone,2020,26.8,513.338,Africa
+SYC,Seychelles,2020,7.4,17692.999,Africa
+SRB,Serbia,2020,5.3,9502.708,
+SEN,Senegal,2020,17.2,1608.642,Africa
+SAU,Saudi Arabia,2020,3.9,28759.275,
+STP,Sao Tome and Principe,2020,11.8,2315.158,Africa
+WSM,Samoa,2020,6.8,4058.955,
+RWA,Rwanda,2020,32.6,909.91,Africa
+ROU,Romania,2020,9.7,14825.21,
+QAT,Qatar,2020,4.6,84514.142,
+PRT,Portugal,2020,3.3,24495.209,
+POL,Poland,2020,2.3,18505.719,
+PHL,Philippines,2020,28.7,3686.844,
+PER,Peru,2020,10.8,7034.448,
+PRY,Paraguay,2020,4.6,5626.082,
+PNG,Papua New Guinea,2020,48.4,3269.474,
+PAN,Panama,2020,14.7,16037.641,
+PAK,Pakistan,2020,36.7,1562.258,
+OMN,Oman,2020,12.2,23416.491,
+MKD,North Macedonia,2020,4.1,6862.719,
+NGA,Nigeria,2020,35.3,2355.688,Africa
+NER,Niger,2020,46.7,598.851,Africa
+NIC,Nicaragua,2020,14.1,2384.002,
+NLD,Netherlands,2020,1.6,57835.725,
+NPL,Nepal,2020,30.4,1203.085,
+NRU,Nauru,2020,15.0,10004.731,
+NAM,Namibia,2020,18.4,5016.174,Africa
+MMR,Myanmar,2020,25.2,1285.338,
+MOZ,Mozambique,2020,37.8,546.718,Africa
+MAR,Morocco,2020,12.9,3628.641,Africa
+MNE,Montenegro,2020,8.1,9673.498,
+MNG,Mongolia,2020,7.1,5205.96,
+MDA,Moldova,2020,4.9,5435.446,
+MEX,Mexico,2020,12.1,10165.665,
+MUS,Mauritius,2020,8.7,8892.105,Africa
+MRT,Mauritania,2020,24.2,2141.061,Africa
+MHL,Marshall Islands,2020,32.2,4755.731,
+MLI,Mali,2020,25.7,896.585,Africa
+MDV,Maldives,2020,14.2,14078.416,
+MYS,Malaysia,2020,20.9,13268.339,
+MWI,Malawi,2020,37.0,545.065,Africa
+MDG,Madagascar,2020,40.2,504.308,Africa
+LBY,Libya,2020,43.5,7196.794,Africa
+LBR,Liberia,2020,28.0,776.35,Africa
+LSO,Lesotho,2020,32.1,1212.571,Africa
+LBN,Lebanon,2020,10.4,4002.74,
+LAO,Lao PDR,2020,30.2,2318.822,
+KGZ,Kyrgyz Republic,2020,11.4,1327.009,
+KWT,Kuwait,2020,6.0,38755.059,
+KOR,"Korea, Rep.",2020,2.2,34994.199,
+KIR,Kiribati,2020,14.9,1745.094,
+KEN,Kenya,2020,19.4,2251.98,Africa
+KAZ,Kazakhstan,2020,6.7,10003.119,
+JOR,Jordan,2020,7.3,4635.073,
+JPN,Japan,2020,5.5,39243.371,
+JAM,Jamaica,2020,8.5,5730.397,
+IRQ,Iraq,2020,11.6,7038.242,
+IRN,"Iran, Islamic Rep.",2020,6.3,20261.008,
+IDN,Indonesia,2020,31.8,4690.749,
+IND,India,2020,30.9,2515.435,
+HND,Honduras,2020,19.9,2925.447,
+HTI,Haiti,2020,20.4,1671.512,
+GUY,Guyana,2020,9.0,17107.524,
+GNB,Guinea-Bissau,2020,28.0,872.978,Africa
+GIN,Guinea,2020,29.4,1427.798,Africa
+GTM,Guatemala,2020,42.8,4863.909,
+GRC,Greece,2020,2.2,20939.754,
+GHA,Ghana,2020,14.2,2303.29,Africa
+DEU,Germany,2020,1.6,51103.976,
+GEO,Georgia,2020,5.7,5617.963,
+GMB,"Gambia, The",2020,16.1,843.846,Africa
+GAB,Gabon,2020,14.4,10390.314,Africa
+FJI,Fiji,2020,7.5,5685.258,
+ETH,Ethiopia,2020,35.3,1039.773,Africa
+SWZ,Eswatini,2020,22.6,4035.54,Africa
+EST,Estonia,2020,1.2,27970.807,
+ERI,Eritrea,2020,49.1,701.15,Africa
+GNQ,Equatorial Guinea,2020,19.7,10902.139,Africa
+SLV,El Salvador,2020,11.2,4689.35,
+EGY,"Egypt, Arab Rep.",2020,22.3,4162.081,Africa
+ECU,Ecuador,2020,23.1,6412.351,
+DOM,Dominican Republic,2020,5.9,10259.337,
+DJI,Djibouti,2020,34.0,3775.004,Africa
+CZE,Czech Republic,2020,2.5,27609.193,
+CIV,Cote d'Ivoire,2020,17.8,2574.087,Africa
+CRI,Costa Rica,2020,8.6,12483.076,
+COG,"Congo, Rep.",2020,18.0,3242.942,Africa
+COD,"Congo, Dem. Rep.",2020,40.8,669.365,Africa
+COM,Comoros,2020,22.6,1371.029,Africa
+COL,Colombia,2020,11.5,6806.523,
+CHN,China,2020,4.7,14096.235,
+CHL,Chile,2020,1.6,15941.341,
+TCD,Chad,2020,35.0,742.943,Africa
+CAF,Central African Republic,2020,40.1,527.215,Africa
+CMR,Cameroon,2020,27.2,1637.768,Africa
+KHM,Cambodia,2020,29.9,1751.985,
+CPV,Cabo Verde,2020,9.7,3502.981,Africa
+BDI,Burundi,2020,57.6,272.355,Africa
+BFA,Burkina Faso,2020,25.5,885.941,Africa
+BGR,Bulgaria,2020,6.4,13101.479,
+BRN,Brunei Darussalam,2020,12.7,79816.308,
+BRA,Brazil,2020,6.1,8570.276,
+BWA,Botswana,2020,22.8,7519.206,Africa
+BIH,Bosnia and Herzegovina,2020,9.1,6725.58,
+BOL,Bolivia,2020,12.7,3430.765,
+BTN,Bhutan,2020,22.4,3491.268,
+BEN,Benin,2020,31.3,1432.302,Africa
+BLZ,Belize,2020,13.3,4519.823,
+BEL,Belgium,2020,2.3,52484.57,
+BLR,Belarus,2020,3.9,6384.266,
+BRB,Barbados,2020,6.6,19110.462,
+BGD,Bangladesh,2020,30.2,2361.984,
+BHR,Bahrain,2020,5.1,29103.363,
+AZE,Azerbaijan,2020,16.3,7164.546,
+AUS,Australia,2020,2.1,67464.386,
+ARM,Armenia,2020,9.1,4741.429,
+ARG,Argentina,2020,7.8,12187.297,
+AGO,Angola,2020,37.7,3792.754,Africa
+DZA,Algeria,2020,9.3,4294.418,Africa
+ALB,Albania,2020,9.6,6259.602,
+AFG,Afghanistan,2020,35.1,611.268,

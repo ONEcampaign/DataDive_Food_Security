@@ -106,9 +106,90 @@ def get_ipc():
     columns = {'Country':'country', 'Phase 2':'phase_2', 'Phase 3':'phase_3',
                'Phase 4':'phase_4', 'Phase 5':'phase_5', 'Phase 3+':'phase_3plus',
                'Period from':'period_start', 'Period to':'period_end', 'IPC/CH':'source'}
-    df = df.rename(columns=columns).dropna(subset='source')
+    df = df.rename(columns=columns).dropna(subset='source').replace({'United Republic of Tanzania':'Tanzania',
+                                                                    'Tri-national Central America':'Central America',
+                                                                    'Democratic Republic of the Congo': 'DRC',
+                                                                    'Central African Republic': 'CAR'})
+    for col in ['phase_2', 'phase_3', 'phase_4', 'phase_5', 'phase_3plus']:
+        df[col] = utils.clean_numeric_column(df[col])
 
     return df
+
+
+
+
+#undernourishment
+
+def __clean_fao_undernourishment(df:pd.DataFrame) -> pd.DataFrame:
+    """ """
+
+    df.columns = df.columns.str.lower()
+    df = (df.loc[:, ['area', 'item', 'year', 'value']]
+          .replace({"China, Taiwan Province of": "Taiwan", "China, mainland": "China"})
+          .assign(value_text = lambda d: d.value)
+          .assign(value = lambda d: utils.clean_numeric_column(d.value.str.replace('<', '')))
+          .reset_index(drop=True))
+
+    return df
+
+
+
+def get_fao_undernourishment() -> pd.DataFrame:
+    """
+    read FAO undernourishment data from raw_data folder 'fao_undernourishment_data
+    Data needs to be manually downloaded from FAOStat food security and Nutrition
+    """
+
+    df = pd.read_csv(f'{config.paths.raw_data}/FAO_undernourishment_data.csv')
+    df = __clean_fao_undernourishment(df)
+
+    return df
+
+
+
+
+def __clean_usda_data(df: pd.DataFrame, year: str) -> pd.DataFrame:
+    """ """
+
+    df = (df.rename(columns={'Unnamed: 0':'country',
+                            'Consumer expenditures3':'total_cons_exp',
+                            'Expenditure on food2':'food_exp'})
+          .loc[:, ['country', 'total_cons_exp', 'food_exp']]
+          .dropna(subset = 'country')
+          .dropna(subset = ['total_cons_exp', 'food_exp'])
+          .reset_index(drop=True)
+          .assign(iso_code = lambda d: coco.convert(d.country))
+          .assign(continent = lambda d: coco.convert(d.iso_code, to='continent')))
+
+    return df
+
+
+def _calc_avg_food_exp(df:pd.DataFrame) -> pd.DataFrame:
+    """ """
+
+    df = df.groupby(['country', 'iso_code', 'continent'], as_index=False).agg({'food_exp': np.sum, 'total_cons_exp': np.sum})
+    df['avg_share'] = (df.food_exp/df.total_cons_exp)*100
+
+    return df
+
+
+
+def get_usda_food_exp() -> pd.DataFrame:
+    """ """
+    url = 'https://www.ers.usda.gov/media/e2pbwgyg/2015-2020-food-spending_update-july-2021.xlsx'
+    df = pd.DataFrame()
+
+    years = [2020, 2019, 2018]
+    for year in years:
+        df_year = pd.read_excel(url, sheet_name=str(year), skiprows=2)
+        df_year = __clean_usda_data(df_year, str(year))
+        df = df.append(df_year)
+
+    df = _calc_avg_food_exp(df)
+
+    return df
+
+
 
 
 
