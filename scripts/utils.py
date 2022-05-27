@@ -66,6 +66,32 @@ def filter_countries(df:pd.DataFrame, by: str, values:list = ['Africa'], iso_col
             .drop(columns = by)
             .reset_index(drop=True))
 
+# ============================================================================
+# Income levels
+# ============================================================================
+
+def get_income_levels() -> pd.DataFrame:
+    """Downloads fresh version of income levels from WB"""
+    url = "https://databank.worldbank.org/data/download/site-content/CLASS.xlsx"
+
+    df = pd.read_excel(
+        url,
+        sheet_name="List of economies",
+        usecols=["Code", "Income group"],
+        na_values=None,
+    )
+
+    df = df.dropna(subset=["Income group"])
+
+    return df
+
+def add_income_levels(df:pd.DataFrame, iso_col:str = 'iso_code') -> pd.DataFrame:
+    """Add income levels to a dataframe"""
+
+    income_levels = get_income_levels().set_index("Code").loc[:, "Income group"].to_dict()
+    return df.assign(income_level = lambda d: d[iso_col].map(income_levels))
+
+
 
 
 

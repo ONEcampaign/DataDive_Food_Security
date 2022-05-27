@@ -71,7 +71,7 @@ def _stunting_top_countries_bar(df:pd.DataFrame) -> None:
      .sort_values(by='value', ascending=False)
      .pipe(utils.keep_countries)
      .reset_index(drop=True)
-     .loc[0:20])
+     .loc[0:30])
 
     df = df.append(ssf)
     df.to_csv(f'{config.paths.output}/stunting_top_countries_bar.csv', index=False)
@@ -106,10 +106,13 @@ def food_exp_share_chart() -> None:
     """ """
 
     df = get_usda_food_exp()
-    df = utils.add_gdp_latest(df, iso_col='iso_code', per_capita = True)
+    df = (utils.add_gdp_latest(df, iso_col='iso_code', per_capita = True).pipe(utils.add_income_levels))
+
+    df.loc[df.income_level.isin(['Low income', 'Lower middle income']), 'income_level'] = 'Low/lower middle income'
+    df.loc[df.income_level.isin(['High income', 'Upper middle income']), 'income_level'] = 'High/higher middle income'
+
     df.to_csv(f'{config.paths.output}/food_share_chart.csv', index=False)
 
-    return df
 
 
 # ===========================================================
