@@ -3,8 +3,18 @@
 import pandas as pd
 import numpy as np
 from scripts import utils, config
-from scripts.analysis import get_stunting_wb, get_fao_undernourishment, get_usda_food_exp, get_ipc
+from scripts.analysis import get_stunting_wb, get_fao_undernourishment, get_usda_food_exp, get_ipc, get_food_price_index
 import country_converter as coco
+
+
+def fao_fpi_main(start_date:str = '2000-01-01') -> None:
+    """Creates csv for FAO Food Price Index Chart starting in 2000-01-01"""
+
+    df = get_food_price_index()
+    df.assign(date_popup = lambda d: d.date).loc[df.date>=start_date].to_csv(f'{config.paths.output}/fao_fpi_main.csv', index=False)
+
+
+
 
 
 # ================================================================================
@@ -12,7 +22,7 @@ import country_converter as coco
 # ================================================================================
 
 def _undernourishment_world(df:pd.DataFrame) -> None:
-    """ """
+    """Create undernourishment chart from FAO food security data"""
 
 
     pct_df = df.loc[df.item == 'Prevalence of undernourishment (percent) (annual value)', ['area', 'year', 'value', 'value_text']]
@@ -20,26 +30,6 @@ def _undernourishment_world(df:pd.DataFrame) -> None:
 
     final =  pd.merge(pct_df, mil_df, on=['area', 'year'], how='inner', suffixes=('_pct', '_mil'))
     final[final.area == 'World'].to_csv(f'{config.paths.output}/undernourishment_world.csv', index=False)
-
-
-def _undernourishment_region(df:pd.DataFrame) -> None:
-    """ """
-
-    regions = ['Africa', 'Northern America', 'Europe',  'Central America', 'Caribbean', 'South America', 'Asia', 'Oceania']
-
-    pct_df = df.loc[df.item == 'Prevalence of undernourishment (percent) (annual value)', ['area', 'year', 'value', 'value_text']]
-    mil_df = df.loc[df.item == 'Number of people undernourished (million) (annual value)', ['area', 'year', 'value', 'value_text']]
-
-    final =  pd.merge(pct_df, mil_df, on=['area', 'year'], how='inner', suffixes=('_pct', '_mil'))
-    final = final[final.area.isin(regions)]
-
-    return final
-
-
-
-
-   # final.to_csv(f'{config.paths.output}/undernourishment_region.csv', index=False)
-
 
 def undernourishment() -> None:
     """ """
