@@ -2,8 +2,8 @@
 
 import os
 
-class Paths:
 
+class Paths:
     def __init__(self, project_dir):
         self.project_dir = project_dir
 
@@ -22,5 +22,6 @@ class Paths:
     @property
     def glossaries(self):
         return os.path.join(self.project_dir, "glossaries")
+
 
 paths = Paths(os.path.dirname(os.path.dirname(__file__)))
