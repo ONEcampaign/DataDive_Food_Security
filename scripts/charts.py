@@ -1,9 +1,8 @@
-""" """
+"""Function to create flourish charts"""
 
 import pandas as pd
 from scripts import utils, config
-from scripts.analysis import get_stunting_wb, get_fao_undernourishment, get_usda_food_exp, get_ipc, get_food_price_index
-from scripts.commodity_analysis import get_commodity_prices, get_indices
+from scripts.analysis import get_stunting_wb, get_fao_undernourishment, get_usda_food_exp, get_ipc, get_food_price_index, get_commodity_prices, get_indices
 from typing import Optional
 
 
@@ -115,13 +114,13 @@ def index_chart(indexes:Optional[list] = ['Agriculture', 'Food', 'Oils & Meals',
     df.loc[df.period>='2010-01-01'].to_csv(f'{config.paths.output}/index_chart.csv', index=False)
 
 
-def restriction_chart() -> None:
-    """
-    extract data from IFPRI article to recreate chart
-    https://www.ifpri.org/blog/bad-worse-how-export-restrictions-exacerbate-global-food-security
-    """
+def ifpri_restriction_chart() -> None:
+    """Create trade restriction chart from IFPRI"""
 
-    pass
+    df = pd.read_csv(f'{config.paths.raw_data}/restrictions_data.csv')
+    (df.rename(columns={"Ukraine Crisis [2022]": "Russia's war in Ukraine [2022]" })
+     .to_csv(f'{config.paths.output}/ifpri_restriction.csv', index=False))
+
 
 
 def update_charts() -> None:
@@ -133,7 +132,7 @@ def update_charts() -> None:
     food_exp_share_chart()
     fao_fpi_scrolly()
     commodity_chart()
-    restriction_chart()
+    ifpri_restriction_chart()
 
 
 if __name__ == '__main__':
