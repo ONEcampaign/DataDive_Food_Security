@@ -2,8 +2,8 @@
 
 import pandas as pd
 from scripts import utils, config
-from scripts.analysis import get_stunting_wb, get_fao_undernourishment, get_usda_food_exp, get_ipc, get_food_price_index
-from scripts.commodity_analysis import get_commodity_prices, get_indices
+from scripts.analysis import get_stunting_wb, get_fao_undernourishment, get_usda_food_exp, get_ipc, get_food_price_index, get_commodity_prices, get_indices
+#from scripts.commodity_analysis import get_commodity_prices, get_indices
 from typing import Optional
 
 

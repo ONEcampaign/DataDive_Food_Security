@@ -23,6 +23,7 @@ def get_stunting_wb() -> pd.DataFrame:
             .reset_index(drop=True))
 
 
+# DHS extraction tools
 def __clean_dhs(df:pd.DataFrame) -> pd.DataFrame:
     """Cleans raw data from DHS"""
 
@@ -53,6 +54,7 @@ def get_dhs_indicator(indicator:str, category_name:str) -> pd.DataFrame:
     return df.loc[(df['indicator'] == indicator)&(df['category_name'] == category_name)]
 
 
+#FAO Food index
 def __read_fao_food_price_index(parser:Optional[str] = 'html.parser',
                               headers:Optional[dict] = {'User-Agent': 'Mozilla/5.0'}) -> pd.DataFrame:
     """Retrieve food price index from FAO"""
@@ -98,6 +100,7 @@ def get_food_price_index(*,
     return df
 
 
+#IPC tools
 def get_ipc():
     """
     return clean dataset from IPC: https://www.ipcinfo.org/ipcinfo-website/ipc-dashboard/en/
@@ -117,12 +120,9 @@ def get_ipc():
     return df
 
 
-
-
-#undernourishment
-
+# FAO undernourishment
 def __clean_fao_undernourishment(df:pd.DataFrame) -> pd.DataFrame:
-    """ """
+    """cleans undernourishment dataframe"""
 
     df.columns = df.columns.str.lower()
     df = (df.loc[:, ['area', 'item', 'year', 'value']]
@@ -132,7 +132,6 @@ def __clean_fao_undernourishment(df:pd.DataFrame) -> pd.DataFrame:
           .reset_index(drop=True))
 
     return df
-
 
 
 def get_fao_undernourishment() -> pd.DataFrame:
@@ -147,10 +146,9 @@ def get_fao_undernourishment() -> pd.DataFrame:
     return df
 
 
-
-
+#USDA tools
 def __clean_usda_data(df: pd.DataFrame, year: str) -> pd.DataFrame:
-    """ """
+    """Cleans USDA dataframe"""
 
     df = (df.rename(columns={'Unnamed: 0':'country',
                             'Consumer expenditures3':'total_cons_exp',
@@ -166,17 +164,15 @@ def __clean_usda_data(df: pd.DataFrame, year: str) -> pd.DataFrame:
 
 
 def _calc_avg_food_exp(df:pd.DataFrame) -> pd.DataFrame:
-    """ """
+    """Calculates average food expenditure over 2018, 2019, and 2019 from USDA dataframe"""
 
     df = df.groupby(['country', 'iso_code', 'continent'], as_index=False).agg({'food_exp': np.sum, 'total_cons_exp': np.sum})
     df['avg_share'] = (df.food_exp/df.total_cons_exp)*100
 
     return df
 
-
-
 def get_usda_food_exp() -> pd.DataFrame:
-    """ """
+    """Pipeline to extract USDA data"""
     url = 'https://www.ers.usda.gov/media/e2pbwgyg/2015-2020-food-spending_update-july-2021.xlsx'
     df = pd.DataFrame()
 
@@ -191,7 +187,74 @@ def get_usda_food_exp() -> pd.DataFrame:
     return df
 
 
+# World Bank Commodity prices and Index
+COMMODITY_URL = (
+    "https://thedocs.worldbank.org/en/doc/5d903e848db1d1b83e0ec8f744e55570-"
+    "0350012021/related/CMO-Historical-Data-Monthly.xlsx"
+)
+COMMODITY_DATA = pd.read_excel(COMMODITY_URL, sheet_name="Monthly Prices")
 
+COMMODITY_DATA = pd.read_excel(COMMODITY_URL, sheet_name="Monthly Prices")
+INDEX_DATA = pd.read_excel(COMMODITY_URL, sheet_name="Monthly Indices")
+
+def get_commodity_prices(commodities: list) -> pd.DataFrame:
+    """
+    Gets the commodity data from the World Bank and returns a clean DataFrame
+    """
+    # read excel
+    df = COMMODITY_DATA.copy()
+
+    # cleaning
+    df.columns = df.iloc[3]
+    df = (
+        df.rename(columns={np.nan: "period"})
+            .iloc[6:]
+            .reset_index(drop=True)
+            .rename(columns={"Rice, Thai 5%": "Rice "})
+            .rename(columns={"Wheat, US HRW": "Wheat"})
+            .filter(["period"] + commodities)
+            .replace("..", np.nan)
+    )
+
+    # change date format
+    df["period"] = pd.to_datetime(df.period, format="%YM%m")
+
+    return df
+
+def get_indices(indices: Optional[list] = None) -> pd.DataFrame:
+    """gets index data from World Bank and returns a clean dataframe"""
+
+    df = INDEX_DATA.copy()
+
+    df = df.iloc[9:].reset_index(drop=True).replace("..", np.nan)
+    df.columns = [
+        "period",
+        "Energy",
+        "Non-energy",
+        "Agriculture",
+        "Beverages",
+        "Food",
+        "Oils & Meals",
+        "Grains",
+        "Other Food",
+        "Raw Materials",
+        "Timber",
+        "Other Raw Mat.",
+        "Fertilizers",
+        "Metals & Minerals",
+        "Base Metals (ex. iron ore)",
+        "Precious Metals",
+    ]
+
+    # filter indices
+    if indices is not None:
+        indices.insert(0, "period")  # add column name for period
+        df = df.loc[:, indices]
+
+    # change date format
+    df["period"] = pd.to_datetime(df.period, format="%YM%m")
+
+    return df
 
 
 
