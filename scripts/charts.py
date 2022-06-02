@@ -115,13 +115,13 @@ def index_chart(indexes:Optional[list] = ['Agriculture', 'Food', 'Oils & Meals',
     df.loc[df.period>='2010-01-01'].to_csv(f'{config.paths.output}/index_chart.csv', index=False)
 
 
-def restriction_chart() -> None:
-    """
-    extract data from IFPRI article to recreate chart
-    https://www.ifpri.org/blog/bad-worse-how-export-restrictions-exacerbate-global-food-security
-    """
+def ifpri_restriction_chart() -> None:
+    """Create trade restriction chart from IFPRI"""
 
-    pass
+    df = pd.read_csv(f'{config.paths.raw_data}/restrictions_data.csv')
+    (df.rename(columns={"Ukraine Crisis [2022]": "Russia's war in Ukraine [2022]" })
+     .to_csv(f'{config.paths.output}/ifpri_restriction.csv', index=False))
+
 
 
 def update_charts() -> None:
@@ -133,7 +133,7 @@ def update_charts() -> None:
     food_exp_share_chart()
     fao_fpi_scrolly()
     commodity_chart()
-    restriction_chart()
+    ifpri_restriction_chart()
 
 
 if __name__ == '__main__':

@@ -222,7 +222,6 @@ def get_indices(indices: Optional[list] = None) -> pd.DataFrame:
 
 
 
-if __name__ == '__main__':
-    pass
+
 
 

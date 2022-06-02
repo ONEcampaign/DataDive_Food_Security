@@ -35,5 +35,7 @@ and place the file in `raw_data` as `IPC_data.csv`.
 2. Download FOA undernourishment fata from [FAOStat](https://www.fao.org/faostat/en/#data) - food security and
 nutrition indicators. Select `prevalence of undernourishment (%)` for all years and countries. Place the csv file 
 in `raw data` as `FAO_undernourishment_data.csv`.
+3. Download IFPRI data from the [IFPRI blogpost](https://www.ifpri.org/blog/bad-worse-how-export-restrictions-exacerbate-global-food-security)
+under `Figure 1` and place the file in `raw_data` as `restrictions_data.csv`.
 
 
