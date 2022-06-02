@@ -221,7 +221,73 @@ def get_indices(indices: Optional[list] = None) -> pd.DataFrame:
     return df
 
 
+#Potash
 
+def clean_fao_fertilizer(df:pd.DataFrame) -> pd.DataFrame:
+    """Clean FAO fertilizer dataset"""
+
+    df = (
+        df.loc[
+            df["Year"].isin([2019, 2018, 2017]),
+            ["Area", "Element", "Item", "Year", "Value"],
+        ]
+            .groupby(["Area", "Element", "Item"])
+            .agg("mean")["Value"]
+            .reset_index()
+            .pivot(index=["Area", "Item"], columns="Element", values="Value")
+            .reset_index()
+            .rename(
+            columns={
+                "Area": "country",
+                "Item": "fertiliser",
+                "Agricultural Use": "ag_use",
+                "Export Quantity": "export_quantity",
+                "Import Quantity": "import_quantity",
+                "Export Value": "export_value",
+                "Import Value": "import_value",
+                "Production": "production",
+            }
+        )
+            .replace({"China, Taiwan Province of": "Taiwan", "China, mainland": "China"})
+    )
+
+    # clean countries
+    df["iso_code"] = coco.convert(df.country)
+    df["continent"] = coco.convert(df.iso_code, to="continent")
+    df.country = coco.convert(df.country, to="name_short")
+
+    return df
+
+
+def _calculations(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    calculations for net imports and dependence of net imports in domestic agricultural use
+    where there is no domestic use, dependence is set to 0
+    """
+
+    df["net_import_quantity"] = df.import_quantity - df.export_quantity
+
+    # adjust net import  - change net export quantity to 0
+    df["net_import_quantity_adj"] = df.net_import_quantity
+    df.loc[df.net_import_quantity_adj < 0, "net_import_quantity_adj"] = 0
+
+    # net import dependence in agriculture
+    df["dependence"] = (df.net_import_quantity_adj / df.ag_use) * 100
+    df.replace([np.inf, np.nan], 0, inplace=True)
+    df.loc[
+        df.dependence > 100, "dependence"
+    ] = 100  # replace values with over 100% dependence with 100
+
+    return df
+
+def get_fao_fertilizer(fertilizer_list: Optional[list] = ['Nutrient potash K2O (total)']) -> pd.DataFrame:
+    """Pipeline to read and clean FAO fertilizer data"""
+    df = pd.read_csv(f'{config.paths.raw_data}/FAO_fertilizer.csv')
+
+    df = (clean_fao_fertilizer(df)
+          .pipe(_calculations))
+
+    return df[df.fertiliser.isin(fertilizer_list)]
 
 
 

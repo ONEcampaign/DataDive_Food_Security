@@ -2,8 +2,9 @@
 
 import pandas as pd
 from scripts import utils, config
-from scripts.analysis import get_stunting_wb, get_fao_undernourishment, get_usda_food_exp, get_ipc, get_food_price_index, get_commodity_prices, get_indices
+from scripts.analysis import get_stunting_wb, get_fao_undernourishment, get_usda_food_exp, get_ipc, get_food_price_index, get_commodity_prices, get_indices, get_fao_fertilizer
 from typing import Optional
+import country_converter as coco
 
 
 def fao_fpi_main(start_date:str = '2000-01-01') -> None:
@@ -123,6 +124,17 @@ def ifpri_restriction_chart() -> None:
 
 
 
+def potash_dependence_chart() -> None:
+    """Create potash dependence map"""
+
+    df = get_fao_fertilizer()
+
+    (df.pipe(utils.add_flourish_geometries)
+     .loc[:, ['flourish_geom', 'iso_code', 'country', 'dependence']]
+    .assign(country = lambda d: coco.convert(d.iso_code, to='name_short'))
+    .to_csv(f'{config.paths.output}/potash_map.csv', index=False))
+
+
 def update_charts() -> None:
     """pipileine to update charts for the page"""
 
@@ -133,6 +145,7 @@ def update_charts() -> None:
     fao_fpi_scrolly()
     commodity_chart()
     ifpri_restriction_chart()
+    potash_dependence_chart()
 
 
 if __name__ == '__main__':
