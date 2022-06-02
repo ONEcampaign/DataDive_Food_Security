@@ -30,6 +30,7 @@ def remove_unnamed_cols(df:pd.DataFrame) -> pd.DataFrame:
     return df.loc[:, ~df.columns.str.contains('Unnamed')]
 
 def clean_numeric_column(column: pd.Series) -> pd.Series:
+    """removes commas and transforms pandas series to numeric"""
 
     column = column.str.replace(",", "")
     column = pd.to_numeric(column)
@@ -37,7 +38,7 @@ def clean_numeric_column(column: pd.Series) -> pd.Series:
     return column
 
 def get_latest_values(df:pd.DataFrame, grouping_col:str, date_col:str) -> pd.DataFrame:
-    """ """
+    """returns a dataframe with only latest values per group"""
 
     return (df.loc[df.groupby(grouping_col)[date_col].transform(max) == df[date_col]]
             .reset_index(drop=True))
@@ -92,9 +93,6 @@ def add_income_levels(df:pd.DataFrame, iso_col:str = 'iso_code') -> pd.DataFrame
     return df.assign(income_level = lambda d: d[iso_col].map(income_levels))
 
 
-
-
-
 # ===================================================
 # World Bank API
 # ===================================================
@@ -139,6 +137,7 @@ def get_wb_indicator(code: str, database: int = 2) -> pd.DataFrame:
 # ==========================================
 # IMF
 # ==============================================
+
 WEO_YEAR = 2022
 WEO_RELEASE = 1
 
@@ -213,8 +212,8 @@ def get_gdp_latest(per_capita:bool = False, year:int = 2022) -> pd.DataFrame:
         return get_weo_indicator_latest(target_year = year, indicator='NGDPD').assign(value = lambda d: d.value*1e9)
 
 
-def add_gdp_latest(df:pd.DataFrame, iso_col:str = 'iso_code', per_capita = False, year: int = 2022):
-    """ """
+def add_gdp_latest(df:pd.DataFrame, iso_col:str = 'iso_code', per_capita = False, year: int = 2022) -> pd.DataFrame:
+    """adds a column with latest gdp values to a dataframe"""
 
     if per_capita:
         new_col_name = 'gdp_per_capita'
