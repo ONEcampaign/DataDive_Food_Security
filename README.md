@@ -3,8 +3,8 @@ This repository contains the scripts and data necessary to reproduce the
 <a href = "https://www.one.org/africa/explore-food-security/">Food Security Data Dive page</a>.
 
 Maintainers:
-- Luca Picci
-- Jorge Rivera
+- Luca Picci [https://github.com/lpicci96/lpicci96]
+- Jorge Rivera [https://github.com/jm-rivera]
 
 ### Sources
 - World Bank - World Development Indicators
