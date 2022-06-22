@@ -142,6 +142,7 @@ def live_ipc_charts() -> None:
                 }
             )
             .dropna(subset=[phase])
+            .loc[lambda d: d[phase] > 0]
             .to_csv(f"{config.paths.output}/ipc_{phase}.csv", index=False)
         )
 
