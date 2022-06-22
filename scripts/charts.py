@@ -145,7 +145,7 @@ def live_ipc_charts() -> None:
             .to_csv(f"{config.paths.output}/ipc_{phase}.csv", index=False)
         )
 
-    for phase in ("phase_3", "phase_4", "phase_5", "phase_3plus"):
+    for phase in ("phase_2", "phase_3", "phase_4", "phase_5", "phase_3plus"):
         __phase_df(df, phase)
 
 
