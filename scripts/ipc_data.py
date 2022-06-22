@@ -41,11 +41,11 @@ def _build_table(data: list):
             "to_date": country["to"],
             "year": country["year"],
             "source": "IPC" if "Acute" in country["title"] else "CH",
-            "phase 1": country["phases"][0]["population"],
-            "phase 2": country["phases"][1]["population"],
-            "phase 3": country["phases"][2]["population"],
-            "phase 4": country["phases"][3]["population"],
-            "phase 5": country["phases"][4]["population"],
+            "phase_1": country["phases"][0]["population"],
+            "phase_2": country["phases"][1]["population"],
+            "phase_3": country["phases"][2]["population"],
+            "phase_4": country["phases"][3]["population"],
+            "phase_5": country["phases"][4]["population"],
             "condition": country["condition"],
         }
         df = pd.concat([df, pd.DataFrame(data_, index=[r])], ignore_index=False)
@@ -116,19 +116,21 @@ class IPC:
                 .reset_index(drop=True)
             )
 
-        return df.filter(
+        return df.assign(
+            phase_3plus=lambda d: d.phase_3 + d.phase_4 + d.phase_5
+        ).filter(
             [
                 "iso_code",
                 "country_name",
-                "phase 1",
-                "phase 2",
-                "phase 3",
-                "phase 4",
-                "phase 5",
+                "phase_1",
+                "phase_2",
+                "phase_3",
+                "phase_4",
+                "phase_5",
+                "phase_3plus",
                 "from_date",
                 "to_date",
                 "source",
-                "condition",
             ],
             axis=1,
         )

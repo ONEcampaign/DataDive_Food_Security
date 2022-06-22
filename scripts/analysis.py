@@ -207,7 +207,7 @@ COMMODITY_URL = (
     "https://thedocs.worldbank.org/en/doc/5d903e848db1d1b83e0ec8f744e55570-"
     "0350012021/related/CMO-Historical-Data-Monthly.xlsx"
 )
-COMMODITY_DATA = pd.read_excel(COMMODITY_URL, sheet_name="Monthly Prices")
+
 
 COMMODITY_DATA = pd.read_excel(COMMODITY_URL, sheet_name="Monthly Prices")
 INDEX_DATA = pd.read_excel(COMMODITY_URL, sheet_name="Monthly Indices")

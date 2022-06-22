@@ -15,6 +15,8 @@ from scripts.analysis import (
 from typing import Optional
 import country_converter as coco
 
+from scripts.ipc_data import IPC
+
 
 def fao_fpi_main(start_date: str = "2000-01-01") -> None:
     """Creates csv for FAO Food Price Index Chart starting in 2000-01-01"""
@@ -108,6 +110,45 @@ def ipc_charts() -> None:
         )
 
 
+def live_ipc_charts() -> None:
+    ipc = IPC()
+
+    df = ipc.get_ipc_ch_data().assign(
+        from_date=lambda d: d.from_date.dt.strftime("%b %Y"),
+        to_date=lambda d: d.to_date.dt.strftime("%b %Y"),
+    )
+
+    df.to_csv(f"{config.paths.output}/ipc_data.csv", index=False)
+
+    def __phase_df(df_: pd.DataFrame, phase: str) -> pd.DataFrame:
+        return (
+            df_.sort_values(by=phase, ascending=False)
+            .reset_index(drop=True)
+            .loc[0:15]
+            .filter(
+                [
+                    "country_name",
+                    phase,
+                    "from_date",
+                    "to_date",
+                    "source",
+                ]
+            )
+            .rename(
+                columns={
+                    "country_name": "country",
+                    "from_date": "period_start",
+                    "to_date": "period_end",
+                }
+            )
+            .dropna(subset=[phase])
+            .to_csv(f"{config.paths.output}/ipc_{phase}.csv", index=False)
+        )
+
+    for phase in ("phase_3", "phase_4", "phase_5", "phase_3plus"):
+        __phase_df(df, phase)
+
+
 def food_exp_share_chart() -> None:
     """Creates scatter plot of share of food expenditure vs gdp per capita"""
 
@@ -139,11 +180,11 @@ def fao_fpi_scrolly(start_date: str = "2010-01-01") -> None:
     )
 
 
-def commodity_chart(
-    commodities: Optional[list] = ["Palm oil", "Sunflower oil", "Maize", "Wheat"]
-) -> None:
+def commodity_chart(commodities=None) -> None:
     """Creates chart for WB commodity prices"""
 
+    if commodities is None:
+        commodities = ["Palm oil", "Sunflower oil", "Maize", "Wheat"]
     df = get_commodity_prices(commodities)
     (
         df.assign(date_popup=lambda d: d.period)
@@ -152,21 +193,21 @@ def commodity_chart(
     )
 
 
-def index_chart(
-    indexes: Optional[list] = [
-        "Agriculture",
-        "Food",
-        "Oils & Meals",
-        "Grains",
-        "Other Food",
-        "Fertilizers",
-    ]
-) -> None:
+def index_chart(indexes=None) -> None:
     """
     Creates chart for WB index
     (Not Used in main page)
     """
 
+    if indexes is None:
+        indexes = [
+            "Agriculture",
+            "Food",
+            "Oils & Meals",
+            "Grains",
+            "Other Food",
+            "Fertilizers",
+        ]
     df = get_indices(indexes)
     df.loc[df.period >= "2010-01-01"].to_csv(
         f"{config.paths.output}/index_chart.csv", index=False
@@ -201,7 +242,7 @@ def update_charts() -> None:
     """pipileine to update charts for the page"""
 
     fao_fpi_main()
-    ipc_charts()
+    live_ipc_charts()
     stunting_top_countries_bar()
     food_exp_share_chart()
     fao_fpi_scrolly()
