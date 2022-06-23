@@ -14,10 +14,7 @@ def last_updated():
 
 
 if __name__ == "__main__":
-    import os
-    print(os.environ.keys())
-
-    #update_charts()
+    update_charts()
 
     # Save update time
     last_updated()

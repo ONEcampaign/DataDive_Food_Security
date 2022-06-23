@@ -34,9 +34,6 @@ def _build_table(data: list):
     # Empty dataframe to hold data
     df = pd.DataFrame()
 
-    print(type(data))
-    print(data)
-
     for r, country in enumerate(data):
         data_: dict = {
             "iso2": country["country"],
@@ -69,7 +66,7 @@ class IPC:
 
     def __post_init__(self):
         if self.api_key is None:
-            self.api_key = os.environ["IPC_WEB_API"]
+            self.api_key = os.environ["IPC_WEB_KEY"]
 
     def _get_request_url(
         self, call_type: str = "population", format: str = "csv", **parameters
