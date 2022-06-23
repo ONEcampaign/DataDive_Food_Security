@@ -15,6 +15,7 @@ def last_updated():
 
 if __name__ == "__main__":
     import os
+
     print(f"starting, the secret is {os.environ['IPC_WEB_KEY']}")
 
     update_charts()
