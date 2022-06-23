@@ -3,15 +3,15 @@ name: Update Charts
   schedule:
     - cron: '0 10 * * *'
   workflow_dispatch:
+env:
+  IPC_WEB_KEY: ${{ secrets.IPC_WEB_KEY }}
+  IPC_KEY: ${{ secrets.IPC_KEY }}
 jobs:
-  update_commodities:
+  update_data:
     runs-on: ubuntu-latest
-
     steps:
       - name: checkout repo content
-        uses: actions/checkout@v2
-        with:
-          ref: ${{ github.head_ref }}
+        uses: actions/checkout@v3
       - name: setup python
         uses: actions/setup-python@v2
         with:
@@ -21,9 +21,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - name: Execute Update Script
-        env:
-          IPC_WEB_KEY: ${{secrets.IPC_WEB_KEY}}
-          IPC_KEY: ${{secrets.IPC_KEY}}
         run:
           python update_data.py
       - name: save-changes
@@ -36,3 +33,4 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
