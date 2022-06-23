@@ -87,9 +87,11 @@ class IPC:
     def get_website_table(self) -> list:
         url = self._get_web_url()
         headers = {
-            "User-Ageng": ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-                           "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0"
-                           " Safari/537.36")
+            "User-Ageng": (
+                "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+                "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0"
+                " Safari/537.36"
+            )
         }
         return requests.get(url, headers=headers).json()
 

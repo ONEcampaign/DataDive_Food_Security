@@ -242,17 +242,17 @@ def potash_dependence_chart() -> None:
 def update_charts() -> None:
     """pipileine to update charts for the page"""
 
-    #fao_fpi_main()
+    # fao_fpi_main()
     live_ipc_charts()
-    #stunting_top_countries_bar()
-    #food_exp_share_chart()
-    #fao_fpi_scrolly()
-    #commodity_chart()
-    #ifpri_restriction_chart()
-    #potash_dependence_chart()
+    # stunting_top_countries_bar()
+    # food_exp_share_chart()
+    # fao_fpi_scrolly()
+    # commodity_chart()
+    # ifpri_restriction_chart()
+    # potash_dependence_chart()
 
 
 if __name__ == "__main__":
-    #update_charts()
+    # update_charts()
     live_ipc_charts()
     print("Successfully updated charts")
