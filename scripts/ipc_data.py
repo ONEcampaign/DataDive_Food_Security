@@ -85,7 +85,12 @@ class IPC:
         return f"{WEB_URL}country?key={self.api_key}"
 
     def get_website_table(self) -> list:
+
         url = self._get_web_url()
+        print(f"The API will be {self.api_key}\n\n\n the URL will be {self._get_web_url()}")
+
+        
+
         headers = {
             "User-Ageng": (
                 "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
