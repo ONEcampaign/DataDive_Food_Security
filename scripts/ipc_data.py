@@ -70,7 +70,6 @@ class IPC:
     def __post_init__(self):
         if self.api_key is None:
             self.api_key = os.environ["IPC_WEB_API"]
-            print(f"API KEY WAS NOT SET, USING {self.api_key}")
 
     def _get_request_url(
         self, call_type: str = "population", format: str = "csv", **parameters
@@ -88,18 +87,7 @@ class IPC:
     def get_website_table(self) -> list:
 
         url = self._get_web_url()
-        print(
-            f"The API will be {self.api_key}\n\n\n the URL will be {self._get_web_url()}"
-        )
-
-        headers = {
-            "User-Ageng": (
-                "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-                "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0"
-                " Safari/537.36"
-            )
-        }
-        return requests.get(url, headers=headers).json()
+        return requests.get(url).json()
 
     def get_ipc_ch_data(
         self, latest: bool = True, only_valid: bool = False

@@ -2,9 +2,6 @@ name: Enforce Black
 
 on:
   #triggers workflow on push to main or any PRs
-  push:
-    branches:
-      - main
   pull_request:
     branches:
       - "*"
