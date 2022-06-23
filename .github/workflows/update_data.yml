@@ -21,6 +21,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - name: Execute Update Script
+        env:
+          IPC_WEB_KEY: ${{secrets.IPC_WEB_KEY}}
+          IPC_KEY: ${{secrets.IPC_KEY}}
         run:
           python update_data.py
       - name: save-changes
