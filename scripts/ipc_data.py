@@ -34,6 +34,9 @@ def _build_table(data: list):
     # Empty dataframe to hold data
     df = pd.DataFrame()
 
+    print(type(data))
+    print(data)
+
     for r, country in enumerate(data):
         data_: dict = {
             "iso2": country["country"],
@@ -83,7 +86,12 @@ class IPC:
 
     def get_website_table(self) -> list:
         url = self._get_web_url()
-        return requests.get(url).json()
+        headers = {
+            "User-Ageng": ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+                           "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0"
+                           " Safari/537.36")
+        }
+        return requests.get(url, headers=headers).json()
 
     def get_ipc_ch_data(
         self, latest: bool = True, only_valid: bool = False
