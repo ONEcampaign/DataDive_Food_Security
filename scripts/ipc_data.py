@@ -87,9 +87,9 @@ class IPC:
     def get_website_table(self) -> list:
 
         url = self._get_web_url()
-        print(f"The API will be {self.api_key}\n\n\n the URL will be {self._get_web_url()}")
-
-        
+        print(
+            f"The API will be {self.api_key}\n\n\n the URL will be {self._get_web_url()}"
+        )
 
         headers = {
             "User-Ageng": (
