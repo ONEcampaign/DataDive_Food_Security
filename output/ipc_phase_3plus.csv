@@ -1,5 +1,6 @@
 country,phase_3plus,period_start,period_end,source
 DR Congo,25879508,Jan 2022,Jun 2022,IPC
+Nigeria,19453305,Jun 2022,Aug 2022,CH
 Yemen,19013500,Jun 2022,Dec 2022,IPC
 Afghanistan,18920522,Jun 2022,Nov 2022,IPC
 South Africa,11795948,Jan 2021,Mar 2021,IPC
@@ -10,8 +11,7 @@ Somalia,7071270,Jun 2022,Sep 2022,IPC
 Pakistan,4685888,Apr 2022,Jun 2022,IPC
 Guatemala,4600986,Jun 2022,Sep 2022,IPC
 Haiti,4495852,Mar 2022,Jun 2022,IPC
+Niger,4402406,Jun 2022,Aug 2022,CH
 Kenya,4102255,Mar 2022,Jun 2022,IPC
+Burkina Faso,3453510,Jun 2022,Aug 2022,CH
 Zimbabwe,3380232,Jan 2021,Mar 2021,IPC
-Honduras,2644239,Jun 2022,Aug 2022,IPC
-Malawi,2632740,Jun 2022,Sep 2022,IPC
-Central African Republic,2208903,Apr 2022,Aug 2022,IPC
