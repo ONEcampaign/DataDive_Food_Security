@@ -195,7 +195,7 @@ def get_usda_food_exp() -> pd.DataFrame:
     for year in years:
         df_year = pd.read_excel(url, sheet_name=str(year), skiprows=2)
         df_year = __clean_usda_data(df_year, str(year))
-        df = df.append(df_year)
+        df = pd.concat([df, df_year], ignore_index=True)
 
     df = _calc_avg_food_exp(df)
 

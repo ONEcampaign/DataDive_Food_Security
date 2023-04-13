@@ -83,7 +83,7 @@ def stunting_top_countries_bar() -> None:
         .loc[0:30]
     )
 
-    df = df.append(ssf)
+    df = pd.concat([df, ssf], ignore_index=True)
     df.to_csv(f"{config.paths.output}/stunting_top_countries_bar.csv", index=False)
 
 
