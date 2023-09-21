@@ -1,7 +1,7 @@
-period_start,period_end,source,phase_5,country
-Apr 2023,Jun 2023,IPC,727100,Somalia
-Jul 2021,Sep 2021,IPC,401313,Ethiopia
-Apr 2023,Jul 2023,IPC,43000,South Sudan
-Mar 2023,Jun 2023,IPC,19206,Haiti
-Oct 2022,Dec 2022,CH,2975,Nigeria
-Oct 2022,Dec 2022,CH,1817,Burkina Faso
+country,phase_5,period_start,period_end,source
+Somalia,727100,Apr 2023,Jun 2023,IPC
+Ethiopia,401313,Jul 2021,Sep 2021,IPC
+South Sudan,43000,Apr 2023,Jul 2023,IPC
+Haiti,19206,Mar 2023,Jun 2023,IPC
+Nigeria,2975,Oct 2022,Dec 2022,CH
+Burkina Faso,1817,Oct 2022,Dec 2022,CH

@@ -1,17 +1,17 @@
-period_start,period_end,source,phase_3,country
-Jan 2023,Jun 2023,IPC,21707327,DR Congo
-Oct 2022,Dec 2022,CH,16283809,Nigeria
-Nov 2022,Mar 2023,IPC,13823864,Afghanistan
-Oct 2022,Dec 2022,IPC,10832000,Yemen
-Jan 2021,Mar 2021,IPC,9598771,South Africa
-Oct 2022,Feb 2023,IPC,6189076,Sudan
-Sep 2022,Dec 2022,IPC,6027992,Pakistan
-Apr 2023,Jul 2023,IPC,4822000,South Sudan
-Apr 2023,Jun 2023,IPC,4818200,Somalia
-Jul 2021,Sep 2021,IPC,4558999,Ethiopia
-Oct 2022,Mar 2023,IPC,3822502,Malawi
-Oct 2022,Dec 2022,CH,3356781,Cameroon
-Oct 2022,Dec 2022,IPC,3142733,Kenya
-Oct 2022,Feb 2023,IPC,3111434,Guatemala
-Mar 2023,Jun 2023,IPC,3038489,Haiti
-Oct 2022,Mar 2023,IPC,2748872,Mozambique
+country,phase_3,period_start,period_end,source
+DR Congo,21707327,Jan 2023,Jun 2023,IPC
+Nigeria,16283809,Oct 2022,Dec 2022,CH
+Afghanistan,13823864,Nov 2022,Mar 2023,IPC
+Yemen,10832000,Oct 2022,Dec 2022,IPC
+South Africa,9598771,Jan 2021,Mar 2021,IPC
+Sudan,6189076,Oct 2022,Feb 2023,IPC
+Pakistan,6027992,Sep 2022,Dec 2022,IPC
+South Sudan,4822000,Apr 2023,Jul 2023,IPC
+Somalia,4818200,Apr 2023,Jun 2023,IPC
+Ethiopia,4558999,Jul 2021,Sep 2021,IPC
+Malawi,3822502,Oct 2022,Mar 2023,IPC
+Cameroon,3356781,Oct 2022,Dec 2022,CH
+Kenya,3142733,Oct 2022,Dec 2022,IPC
+Guatemala,3111434,Oct 2022,Feb 2023,IPC
+Haiti,3038489,Mar 2023,Jun 2023,IPC
+Mozambique,2748872,Oct 2022,Mar 2023,IPC
