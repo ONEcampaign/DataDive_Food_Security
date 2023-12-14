@@ -242,7 +242,7 @@ def potash_dependence_chart() -> None:
 def update_charts() -> None:
     """pipileine to update charts for the page"""
 
-    fao_fpi_main()
+    # fao_fpi_main()
     live_ipc_charts()
     stunting_top_countries_bar()
     food_exp_share_chart()
